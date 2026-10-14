@@ -1,0 +1,27 @@
+# Node dependencies
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+
+# Python cache
+__pycache__/
+**/__pycache__/
+.pytest_cache/
+
+# Python virtual environments
+venv/
+.venv/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Local database - review before deployment
+backend/*.db
+backend/*.sqlite
+backend/*.sqlite3
+
+# Large Cloudflare executable
+cloudflared.exe
