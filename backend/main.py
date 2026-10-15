@@ -28,8 +28,7 @@ from services.recommender import (
 )
 from services.booking_service import (
     list_advisors,
-    create_booking,
-    list_all_bookings
+    create_booking
 )
 from services.advisory import answer_advisory_query
 
@@ -147,26 +146,7 @@ def book_consultation(req: ConsultationBookingRequest, db: Session = Depends(get
         raise HTTPException(status_code=500, detail=f"Booking error: {str(e)}")
 
 @app.get("/api/bookings")
-def get_all_bookings(db: Session = Depends(get_db)):
-    bookings = list_all_bookings(db)
-    return [
-        {
-            "id": b.id,
-            "booking_reference": b.booking_reference,
-            "advisor_name": b.advisor_name,
-            "customer_name": b.customer_name,
-            "customer_email": b.customer_email,
-            "customer_phone": b.customer_phone,
-            "booking_date": b.booking_date,
-            "time_slot": b.time_slot,
-            "consultation_mode": b.consultation_mode,
-            "recommended_product_category": b.recommended_product_category,
-            "calculated_cover_gap": b.calculated_cover_gap,
-            "status": b.status,
-            "created_at": b.created_at.isoformat() if b.created_at else None
-        }
-        for b in bookings
-    ]
+
 
 @app.post("/api/advisory-chat", response_model=AdvisoryAnswerResponse)
 def chat_with_advisor(req: AdvisoryQuestionRequest):
